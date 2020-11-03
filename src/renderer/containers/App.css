@@ -1,0 +1,21 @@
+/* All components use this class on their root element */
+.container {
+    background-color: #457B9D;
+    box-shadow: 0 0 10px rgb(26, 26, 26);
+    flex-grow: 1;
+    margin: 15px;
+}
+
+.app {
+    width: 96vw;
+    height: 96vh;
+    margin: 2vh 2vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.trackers {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
