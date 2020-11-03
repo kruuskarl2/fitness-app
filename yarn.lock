@@ -5085,6 +5085,11 @@ findup-sync@^3.0.0:
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
 
+fitness-health-calculations@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/fitness-health-calculations/-/fitness-health-calculations-1.0.2.tgz#d044322059033268f9af785d3c60e64bd51f7f4d"
+  integrity sha512-GPEKNFJCRosgKPHIMnTgvzfAJ5khiIwW2GxgEQ6oTFllQ1WM4BZnEl/Q3/es2uR54xgHGlmOQQzJd7v+Zm9L5g==
+
 flat-cache@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-2.0.1.tgz#5d296d6f04bda44a4630a301413bdbc2ec085ec0"

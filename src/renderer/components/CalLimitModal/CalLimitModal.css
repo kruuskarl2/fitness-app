@@ -1,0 +1,41 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 50%;
+}
+
+.modal {
+    background-color: var(--medium);
+    opacity: 100%;
+    position: fixed;
+    top: 20%;
+    left: 25%;
+    padding: 1.5% 1.5%;
+    max-height: 57%;
+    width: 47%;
+    box-shadow: 0 0 10px rgb(26, 26, 26);
+    overflow: auto;
+}
+
+.current-limit {
+    text-align: center;
+}
+
+.footer {
+    height: 0;
+    border-top: 3px solid var(--darkest);
+    border-bottom: 3px solid var(--darkest);
+    margin: 10px 0 15px;
+    text-align: center;
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.is-open {
+    height: 60px;
+    padding-bottom: 10px;
+}
