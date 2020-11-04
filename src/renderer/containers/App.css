@@ -5,11 +5,12 @@
     flex-grow: 1;
     margin: 15px;
     padding: 15px;
+    flex-basis: 30%;
 }
 
 .container-title {
-    border-bottom: 5px solid var(--darkest);
-    padding: 0 10px 10px;
+    border-bottom: 3px solid var(--darkest);
+    padding: 0 0 10px;
 }
 
 .app {

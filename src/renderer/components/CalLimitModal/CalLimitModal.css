@@ -4,8 +4,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: black;
-    opacity: 50%;
+    background-color: var(--darkest);
 }
 
 .modal {

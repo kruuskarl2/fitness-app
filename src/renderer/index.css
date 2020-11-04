@@ -16,6 +16,11 @@ body {
   background-color: var(--darkest);
   overflow: hidden;
   color: var(--white);
+  -moz-user-select: none; 
+  -webkit-user-select: none; 
+  -ms-user-select:none; 
+  user-select:none;
+  -o-user-select:none;
 }
 
 h5 {

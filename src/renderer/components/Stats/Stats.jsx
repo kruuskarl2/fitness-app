@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader/root';
 const stats = () => {
     return (
         <div className="container">
-            <h2 className="container-title">Statistics</h2>
+            <h3 className="container-title">Statistics</h3>
         </div>
     );
 };

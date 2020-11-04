@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader/root';
 const trainingTracker = () => {
     return (
         <div className="container">
-            <h2 className="container-title">Training tracker</h2>
+            <h3 className="container-title">Training tracker</h3>
         </div>
     );
 };
