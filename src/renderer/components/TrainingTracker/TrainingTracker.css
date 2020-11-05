@@ -1,0 +1,92 @@
+.activity {
+    background-color: var(--darkest);
+    border-radius: 10px;
+    font-weight: bold;
+    height: 29px;
+    transition: 0.3s;
+    margin: 5px 0;
+}
+
+.activity:hover {
+    background-color: var(--lightest);
+    color: var(--darkest);
+}
+
+.activities {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    border-left: 3px solid var(--darkest);
+    padding: 0 10px;
+    overflow: auto;
+}
+
+.activity-is-open {
+    width: auto !important;
+    height: 245px !important;
+    background-color: var(--darkest) !important;
+    color: var(--white) !important; 
+    padding: 3px 12px;
+}
+
+.activity > .activity-editor {
+    display: none;
+}
+
+.activity-is-open > .activity-editor {
+    display: block !important;
+}
+
+.new-activity {
+    width: 118px;
+}
+
+.activity-editor > input {
+    background-color: var(--lightest);
+    color: var(--darkest);
+    font-weight: bold;
+}
+
+.activity-editor > button {
+    height: 30px;
+    padding: 0;
+    margin: 5px 0;
+    background-color: var(--lightest);
+    color: var(--darkest);
+    border-radius: 5px;
+}
+
+.activity-editor > button:hover {
+    background-color: var(--medium);
+    color: var(--white);
+}
+
+.activity-button {
+    display: flex;
+}
+
+.activity-button > input {
+    margin: 0;
+    padding: 3px 12px;
+    background-color: transparent;
+    width: 50px;
+    box-shadow: none;
+    text-align: right;
+    font-weight: bold;
+    padding: 4px 0;
+}
+
+.activity-button > h4:first-of-type {
+    padding-left: 12px;
+    flex-grow: 1;
+}
+
+.activity-button > h4 {
+    padding: 3px 10px 3px 3px;
+}
+
+.activity-is-open > .activity-button > h4 {
+    border-bottom: 2px solid var(--white) !important;
+    padding: 4px 0;
+    flex-grow: 1;
+}

@@ -2,11 +2,14 @@
     width: 100%;
     height: 17px;
     background-color: var(--darkest);
+    border-radius: 7px;
 }
 
 .progress > div {
     background-color: var(--lightest);
     height: 100%;
+    border-radius: 7px;
+    transition: 0.3s;
 }
 
 .double-input {
@@ -20,6 +23,7 @@
     padding: 0 10px;
     width: auto;
     flex-grow: 1;
+    border-radius: 7px 0 0 7px;
 }
 
 .double-input > input {
@@ -28,10 +32,12 @@
     border-left: 1px solid var(--lightest);
     width: 70px;
     flex-grow: 0;
+    border-radius: 0 7px 7px 0;
 }
 
 .double-input input:first-of-type {
     flex-grow: 10;
+    border-radius: 0;
 }
 
 .meals {
@@ -39,6 +45,7 @@
     max-height: 250px;
     overflow: auto;
     padding: 0;
+    border-radius: 7px;
 }
 
 .meals > li {

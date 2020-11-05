@@ -54,8 +54,8 @@ const calLimitModal = props => {
                     <option value="female">Female</option>
                 </select>
                 <input ref={age} type="number" placeholder="Age" onChange={calculateCalories}/>
-                <input ref={height} type="number" placeholder="Height (cm)" onChange={calculateCalories}/>
-                <input ref={weight} type="number" placeholder="Weight (kg)" onChange={calculateCalories}/>
+                <input ref={height} type="number" placeholder="Height (cm/feet)" onChange={calculateCalories}/>
+                <input ref={weight} type="number" placeholder="Weight (kg/lbs)" onChange={calculateCalories}/>
                 <select ref={activityLevel} onChange={calculateCalories}>
                     <option value="sedentary">Sedentary - little to no exercise + work a desk job</option>
                     <option value="light">Light - light exercise 1-3 days/week</option>

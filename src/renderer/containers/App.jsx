@@ -17,7 +17,10 @@ class App extends React.Component {
             showCalLimitModal: false,
             date: null,
             caloriesEaten: 0,
-            meals: []
+            caloriesBurned: 0,
+            meals: [],
+            showNewActivity: false,
+            activities: []
         };
     }
 
@@ -54,7 +57,7 @@ class App extends React.Component {
         if (!this.state.calorieLimit) return;
         this.setState({
             ...this.state,
-            showCalLimitModal: false
+            showCalLimitModal: !this.state.showCalLimitModal
         });
     }
 
@@ -90,6 +93,76 @@ class App extends React.Component {
         });
     }
 
+    toggleNewActivityHandler() {
+        this.setState({
+            ...this.state,
+            showNewActivity: !this.state.showNewActivity
+        });
+    }
+
+    addActivityHandler(name, unit, cal, index) {
+        const activities = [...this.state.activities];
+
+        if (index !== undefined) activities.splice(index, 1);
+
+        this.setState({
+            ...this.state,
+            activities: [
+                ...activities,
+                {
+                    name,
+                    unit,
+                    cal,
+                    open: false,
+                    workDone: 0
+                }
+            ],
+            showNewActivity: false
+        });
+    }
+
+    toggleActivityOpenHandler(index) {
+        const activities = [...this.state.activities];
+
+        activities[index].open = !activities[index].open;
+
+        this.setState({
+            ...this.state,
+            activities
+        });
+    }
+
+    setWorkDoneHandler(event, index) {
+        event.persist();
+
+        const activities = [...this.state.activities];
+
+        const value = (event.target.value) ? event.target.value : 0;
+        activities[index].workDone = value;
+
+        let caloriesBurned = 0;
+        activities.map((activity) => {
+            caloriesBurned += (activity.cal * activity.workDone);
+        });
+
+        this.setState({
+            ...this.state,
+            activities,
+            caloriesBurned
+        });
+    }
+
+    removeActivityHandler(index) {
+        const activities = [...this.state.activities];
+
+        activities.splice(index, 1);
+
+        this.setState({
+            ...this.state,
+            activities
+        });
+    }
+
     render() {
         return (
             <div className="app">
@@ -102,7 +175,17 @@ class App extends React.Component {
                         meals={this.state.meals}
                         removeMeal={this.removeMealHandler.bind(this)}
                     />
-                    <TrainingTracker />
+                    <TrainingTracker
+                        date={this.state.date}
+                        toggleNewActivity={this.toggleNewActivityHandler.bind(this)}
+                        showNewActivity={this.state.showNewActivity}
+                        activities={this.state.activities}
+                        addActivity={this.addActivityHandler.bind(this)}
+                        toggleActivityEditor={this.toggleActivityOpenHandler.bind(this)}
+                        setWorkDone={this.setWorkDoneHandler.bind(this)}
+                        removeActivity={this.removeActivityHandler.bind(this)}
+                        calBurned={this.state.caloriesBurned}
+                    />
                 </div>
                 <Stats />
                 <CalLimitModal
