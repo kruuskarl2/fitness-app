@@ -1,10 +1,16 @@
 import React, { useRef } from 'react';
 import { hot } from 'react-hot-loader/root';
 import './CalorieTracker.css';
+import Date from '../Date/Date';
 
 const calorieTracker = props => {
     const mealName = useRef(null);
     const mealCal = useRef(null);
+
+    const { calorieLimit, removeMeal, dateData, changeDate, date } = props;
+    // If date data doesn't exist yet, render nothing
+    if (!dateData) return null;
+    const { caloriesEaten, meals } = dateData;
 
     const addMeal = () => {
         const name = mealName.current.value;
@@ -17,8 +23,6 @@ const calorieTracker = props => {
 
         props.addMeal(name, cal);
     };
-
-    const { caloriesEaten, calorieLimit, meals, removeMeal } = props;
 
     let progress = caloriesEaten / (calorieLimit / 100);
     progress = (caloriesEaten > calorieLimit) ? 100 : progress;
@@ -34,7 +38,7 @@ const calorieTracker = props => {
 
     return (
         <div className="container">
-            <h5>{props.date}</h5>
+            <Date date={date} changeDate={changeDate} component={'calorieTracker'}/>
             <h3 className="container-title">Calorie tracker</h3>
             <br/>
             <div className="progress">

@@ -1,0 +1,24 @@
+.date-button {
+    background-color: var(--darkest);
+    border-radius: 100px;
+    padding: 3px 5px 7px 5px;
+    margin: 0 7px 0 0;
+    width: 20px;
+    text-align: center;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.date-button:hover {
+    background-color: var(--lightest);
+    color: var(--darkest);
+}
+
+.date {
+    display: flex;
+    margin: 0 0 10px;
+}
+
+.date > h5 {
+    margin: 6px 5px;
+}

@@ -15,21 +15,34 @@ class App extends React.Component {
         this.state = {
             calorieLimit: null,
             showCalLimitModal: false,
-            date: null,
-            caloriesEaten: 0,
-            caloriesBurned: 0,
-            meals: [],
+            calDate: null,
+            trainDate: null,
+            datesData: [],
             showNewActivity: false,
             activities: []
         };
     }
 
     componentDidMount() {
+        const currentDate = this.getCurrentDate();
+        const datesData = [...this.state.datesData];
+
+        if (!this.currentDateData()) {
+            datesData.push({
+                caloriesEaten: 0,
+                caloriesBurned: 0,
+                date: currentDate,
+                meals: []
+            });
+        }
+
         this.setState({
             ...this.state,
-            date: this.getCurrentDate(),
+            calDate: currentDate,
+            trainDate: currentDate,
             // If a calorie limit has not been set, calculate one by showing the modal
-            showCalLimitModal: !this.state.calorieLimit
+            showCalLimitModal: !this.state.calorieLimit,
+            datesData
         });
     }
 
@@ -47,7 +60,7 @@ class App extends React.Component {
 
     getCaloriesEaten() {
         let caloriesEaten = 0;
-        this.state.meals.map(meal => {
+        this.currentDateData('calorieTracker').meals.map(meal => {
             caloriesEaten += meal.cal;
         });
         return caloriesEaten;
@@ -64,16 +77,18 @@ class App extends React.Component {
     addMealHandler(name, cal) {
         let caloriesEaten = this.getCaloriesEaten();
         caloriesEaten += cal;
+
+        const datesData = Object.assign(this.state.datesData);
+        datesData.forEach(data => {
+            if (data.date === this.state.calDate) {
+                data.caloriesEaten = caloriesEaten;
+                data.meals.push({ name, cal });
+            }
+        });
+
         this.setState({
             ...this.state,
-            caloriesEaten,
-            meals: [
-                ...this.state.meals,
-                {
-                    name,
-                    cal
-                }
-            ]
+            datesData
         });
     }
 
@@ -91,6 +106,25 @@ class App extends React.Component {
             caloriesEaten,
             meals
         });
+    }
+
+    currentDateData(component, date) {
+        if (!date) {
+            switch (component) {
+            case 'calorieTracker':
+                date = this.state.calDate;
+                break;
+            case 'trainingTracker':
+                date = this.state.trainDate;
+                break;
+            default:
+                date = this.state.calDate;
+                break;
+            }
+        }
+        console.log(date);
+        console.log(component);
+        return this.state.datesData.find(dateData => dateData.date === date);
     }
 
     toggleNewActivityHandler() {
@@ -163,17 +197,57 @@ class App extends React.Component {
         });
     }
 
+    changeDateHandler(change, component) {
+        let currentDateStr;
+        if (component === 'calorieTracker') currentDateStr = this.state.calDate;
+        else if (component === 'trainingTracker') currentDateStr = this.state.trainDate;
+        else console.error('Component name invalid');
+
+        const currentDate = date.parse(currentDateStr, 'MMMM D, YYYY');
+        const newDate = date.addDays(currentDate, change);
+        const strDate = date.format(newDate, 'MMMM D, YYYY');
+
+        const datesData = [...this.state.datesData];
+
+        if (!this.currentDateData(component, strDate)) {
+            datesData.push({
+                caloriesEaten: 0,
+                caloriesBurned: 0,
+                date: strDate,
+                meals: []
+            });
+        }
+
+        let calDate = this.state.calDate;
+        let trainDate = this.state.trainDate;
+        switch (component) {
+        case 'calorieTracker':
+            calDate = strDate;
+            break;
+        case 'trainingTracker':
+            trainDate = strDate;
+            break;
+        }
+
+        this.setState({
+            ...this.state,
+            datesData,
+            calDate,
+            trainDate
+        });
+    }
+
     render() {
         return (
             <div className="app">
                 <div className="trackers">
                     <CalorieTracker
                         calorieLimit={this.state.calorieLimit}
-                        date={this.state.date}
-                        caloriesEaten={this.state.caloriesEaten}
+                        date={this.state.calDate}
                         addMeal={this.addMealHandler.bind(this)}
-                        meals={this.state.meals}
                         removeMeal={this.removeMealHandler.bind(this)}
+                        dateData={this.currentDateData('calorieTracker')}
+                        changeDate={this.changeDateHandler.bind(this)}
                     />
                     <TrainingTracker
                         date={this.state.date}
@@ -185,6 +259,7 @@ class App extends React.Component {
                         setWorkDone={this.setWorkDoneHandler.bind(this)}
                         removeActivity={this.removeActivityHandler.bind(this)}
                         calBurned={this.state.caloriesBurned}
+                        changeDate={this.changeDateHandler.bind(this)}
                     />
                 </div>
                 <Stats />

@@ -2,6 +2,7 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import './TrainingTracker.css';
 import Activity from './Activity/Activity';
+import Date from '../Date/Date';
 
 const trainingTracker = props => {
     const activitiesJSX = props.activities.map((activity, index) => {
@@ -20,7 +21,7 @@ const trainingTracker = props => {
     });
     return (
         <div className="container">
-            <h5>{props.date}</h5>
+            <Date date={props.date} changeDate={props.changeDate}/>
             <h3 className="container-title">Training tracker</h3>
             <br/>
             <h4>{props.calBurned} calories burned:</h4>
