@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "date-and-time": "^0.14.1",
+    "electron-json-storage": "^4.3.0",
     "electron-updater": "^4.3.5",
     "fitness-health-calculations": "^1.0.2",
     "react": "^16.12.0",
